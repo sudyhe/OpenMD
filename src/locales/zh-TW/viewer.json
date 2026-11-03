@@ -30,5 +30,17 @@
   "viewer.menu.alignRight": "靠右",
   "viewer.menu.alignDefault": "預設",
   "viewer.menu.replaceImage": "取代圖片…",
-  "viewer.menu.size": "大小"
+  "viewer.menu.size": "大小",
+  "viewer.toolbar.exportPdf": "匯出 PDF",
+  "viewer.toolbar.exportPdfShortcut": "匯出 PDF (Ctrl+P)",
+  "viewer.export.saveTitle": "匯出 PDF",
+  "viewer.export.noDocument": "沒有可匯出的文件",
+  "viewer.export.optionsTitle": "匯出選項",
+  "viewer.export.pageNumbers": "頁碼 (x/y,右下角)",
+  "viewer.export.headings": "標題輸出",
+  "viewer.export.headingAll": "全部",
+  "viewer.export.headingNoH1": "不含 H1",
+  "viewer.export.headingNoH1H2": "不含 H1、H2",
+  "viewer.export.frontmatter": "輸出中繼資料標頭 (frontmatter)",
+  "viewer.export.proceed": "匯出…"
 }

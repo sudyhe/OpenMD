@@ -15,12 +15,14 @@ import { UpdatePopup } from "./components/UpdatePopup";
 import { AppBackground } from "./components/AppBackground";
 import { CloseDialog } from "./components/CloseDialog";
 import { UnsavedDialog } from "./components/UnsavedDialog";
+import { ExportOptionsDialog } from "./components/ExportOptionsDialog";
 import { HOME_TAB_ID, useTabs } from "./stores/tabs";
 import { useSettings } from "./stores/settings";
 import { useWorkspace } from "./stores/workspace";
 import { useUpdate } from "./stores/update";
 import { IS_STORE_BUILD } from "./lib/build-flags";
 import { openStandaloneFiles } from "./lib/openStandaloneFiles";
+import { exportActiveTabToPdf } from "./lib/exportPdf";
 import { viewInAnimation } from "./theme/theme";
 import {
   getOpenedFiles,
@@ -278,6 +280,12 @@ export default function App() {
       } else if (key === "s") {
         e.preventDefault();
         void state.saveTab(state.activeId);
+      } else if (key === "p") {
+        // Ctrl+P:导出 PDF(顺带拦掉 WebView2 默认打印对话框);首页无文档不动作。
+        if (state.activeId !== HOME_TAB_ID) {
+          e.preventDefault();
+          void exportActiveTabToPdf().catch((err) => setOpenError(String(err)));
+        }
       } else if (key === "e") {
         e.preventDefault();
         useSettings.getState().toggleEditMode();
@@ -404,6 +412,7 @@ export default function App() {
       <UpdatePopup />
       <CloseDialog open={closeDialogOpen} onClose={() => setCloseDialogOpen(false)} />
       <UnsavedDialog />
+      <ExportOptionsDialog />
     </Flex>
   );
 }

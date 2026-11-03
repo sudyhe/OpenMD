@@ -30,5 +30,17 @@
   "viewer.menu.alignRight": "右",
   "viewer.menu.alignDefault": "既定",
   "viewer.menu.replaceImage": "画像を置き換え…",
-  "viewer.menu.size": "サイズ"
+  "viewer.menu.size": "サイズ",
+  "viewer.toolbar.exportPdf": "PDFを書き出す",
+  "viewer.toolbar.exportPdfShortcut": "PDFを書き出す (Ctrl+P)",
+  "viewer.export.saveTitle": "PDFを書き出す",
+  "viewer.export.noDocument": "書き出すドキュメントがありません",
+  "viewer.export.optionsTitle": "書き出しオプション",
+  "viewer.export.pageNumbers": "ページ番号 (x/y, 右下)",
+  "viewer.export.headings": "見出しの出力",
+  "viewer.export.headingAll": "すべて",
+  "viewer.export.headingNoH1": "H1 を除外",
+  "viewer.export.headingNoH1H2": "H1・H2 を除外",
+  "viewer.export.frontmatter": "フロントマターを含める",
+  "viewer.export.proceed": "書き出す…"
 }

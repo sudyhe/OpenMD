@@ -14,24 +14,26 @@ import {
 } from "@chakra-ui/react";
 import { useTheme } from "next-themes";
 import {
-  ChevronDown,
-  FileText,
-  FolderOpen,
-  FolderTree,
-  Minus,
-  Moon,
-  PanelLeft,
-  Pencil,
-  Plus,
-  Save,
-  Settings,
-  StretchHorizontal,
-  Sun,
-} from "lucide-react";
+   ChevronDown,
+   FileDown,
+   FileText,
+   FolderOpen,
+   FolderTree,
+   Minus,
+   Moon,
+   PanelLeft,
+   Pencil,
+   Plus,
+   Save,
+   Settings,
+   StretchHorizontal,
+   Sun,
+ } from "lucide-react";
 import { useSettings, MAX_CONTENT_PADDING } from "../stores/settings";
 import { useWorkspace } from "../stores/workspace";
 import { openFolderDialog, openFileDialog } from "../tauri/api";
 import { openStandaloneFiles } from "../lib/openStandaloneFiles";
+import { exportActiveTabToPdf } from "../lib/exportPdf";
 import { isDirty, useTabs } from "../stores/tabs";
 import { withViewTransition } from "../utils/viewTransition";
 import { IS_MACOS } from "../utils/platform";
@@ -278,6 +280,19 @@ export function TitleBar({ onOpenError }: { onOpenError?: (msg: string) => void 
               >
                 <Save size={15} />
                 {t("viewer.toolbar.save")}
+              </Button>
+              <Button
+                aria-label={t("viewer.toolbar.exportPdfShortcut")}
+                title={t("viewer.toolbar.exportPdfShortcut")}
+                variant="ghost"
+                size="sm"
+                gap={1.5}
+                onClick={() =>
+                  void exportActiveTabToPdf().catch((e) => onOpenError?.(String(e)))
+                }
+              >
+                <FileDown size={15} />
+                {t("viewer.toolbar.exportPdf")}
               </Button>
             </>
           )}

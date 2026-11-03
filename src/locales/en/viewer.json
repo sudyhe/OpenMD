@@ -30,5 +30,17 @@
   "viewer.menu.alignRight": "Right",
   "viewer.menu.alignDefault": "Default",
   "viewer.menu.replaceImage": "Replace image…",
-  "viewer.menu.size": "Size"
+  "viewer.menu.size": "Size",
+  "viewer.toolbar.exportPdf": "Export PDF",
+  "viewer.toolbar.exportPdfShortcut": "Export PDF (Ctrl+P)",
+  "viewer.export.saveTitle": "Export PDF",
+  "viewer.export.noDocument": "No document to export",
+  "viewer.export.optionsTitle": "Export options",
+  "viewer.export.pageNumbers": "Page numbers (x/y, bottom right)",
+  "viewer.export.headings": "Headings",
+  "viewer.export.headingAll": "All",
+  "viewer.export.headingNoH1": "Exclude H1",
+  "viewer.export.headingNoH1H2": "Exclude H1 & H2",
+  "viewer.export.frontmatter": "Include frontmatter header",
+  "viewer.export.proceed": "Export…"
 }

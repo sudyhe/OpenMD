@@ -2,6 +2,7 @@ rust_i18n::i18n!("locales", fallback = "zh");
 
 mod commands;
 mod editors;
+mod export_pdf;
 mod file_assoc;
 mod i18n;
 mod pkg;
@@ -219,6 +220,7 @@ pub fn run() {
             file_assoc::unregister_md_association,
             qq_group::get_qq_groups,
             qq_group::get_qq_group_icon,
+            export_pdf::export_pdf,
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {

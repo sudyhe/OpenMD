@@ -13,9 +13,14 @@ export async function readMarkdownFile(path: string): Promise<string> {
 export async function writeMarkdownFile(path: string, content: string): Promise<void> {
   return invoke("write_markdown_file", { path, content });
 }
-
-export async function resolvePath(path: string): Promise<string> {
-  return invoke("resolve_path", { path });
+ 
+ /** 导出 PDF:后端开隐藏窗口加载 `html`,WebView2 PrintToPdf 静默写到 outPath。 */
+ export async function exportPdf(html: string, outPath: string): Promise<void> {
+   return invoke("export_pdf", { html, outPath });
+ }
+ 
+ export async function resolvePath(path: string): Promise<string> {
+   return invoke("resolve_path", { path });
 }
 
 export async function pathExists(path: string): Promise<boolean> {

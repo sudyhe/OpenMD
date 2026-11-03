@@ -9,6 +9,19 @@ export type Language = "auto" | "zh" | "zh-TW" | "ja" | "en";
 /** 统一侧栏的 Tab:目录(本文档大纲)或 文件(工作区目录树)。 */
 export type SidebarTab = "toc" | "files";
 
+/** 导出 PDF 的标题输出范围:很多文档把 `# 标题` 当文件名/大标题,可选择不输出。 */
+export type ExportHeadingLevel = "all" | "no-h1" | "no-h1-h2";
+
+/** 导出 PDF 选项。 */
+export interface ExportOptions {
+  /** 每页右下角页码 x/y。 */
+  pageNumbers: boolean;
+  /** 标题输出范围。 */
+  headingLevel: ExportHeadingLevel;
+  /** 是否输出 H1 之前的 frontmatter 元数据头。 */
+  includeFrontmatter: boolean;
+}
+
 /** 预览正文左右内边距的默认值(px),对齐预设"适中";"铺满"即把边距置 0。 */
 export const DEFAULT_CONTENT_PADDING = 200;
 /** 左右内边距上限(px)。去掉 820px 宽度上限后,宽屏需更大的边距才能收窄阅读栏。 */
@@ -18,6 +31,13 @@ export const MAX_CONTENT_PADDING = 480;
 export const DEFAULT_BACKGROUND_BLUR = 16;
 /** 背景模糊上限(px)。 */
 export const MAX_BACKGROUND_BLUR = 60;
+
+/** 导出 PDF 的默认选项。 */
+export const DEFAULT_EXPORT_OPTIONS: ExportOptions = {
+  pageNumbers: true,
+  headingLevel: "all",
+  includeFrontmatter: true,
+};
 
 interface SettingsState {
   /** Body font size in px. */
@@ -41,6 +61,8 @@ interface SettingsState {
   /** 关闭窗口行为(勾选"不再提醒"后由关闭对话框写入)。 */
   closeAction: CloseAction;
   language: Language;
+  /** 导出 PDF 选项(持久化,记住上次选择)。 */
+  exportOptions: ExportOptions;
   setFontSize: (n: number) => void;
   toggleToc: () => void;
   setSidebarTab: (v: SidebarTab) => void;
@@ -51,6 +73,7 @@ interface SettingsState {
   toggleEditMode: () => void;
   setCloseAction: (v: CloseAction) => void;
   setLanguage: (l: Language) => void;
+  setExportOptions: (patch: Partial<ExportOptions>) => void;
 }
 
 export const useSettings = create<SettingsState>()(
@@ -66,6 +89,7 @@ export const useSettings = create<SettingsState>()(
       editMode: false,
       closeAction: "ask",
       language: "auto",
+      exportOptions: DEFAULT_EXPORT_OPTIONS,
       // 字号滑动过渡在 MarkdownView 的 font-size transition 中实现。
       setFontSize: (n) => set({ fontSize: Math.min(28, Math.max(13, n)) }),
       toggleToc: () => set((s) => ({ tocOpen: !s.tocOpen })),
@@ -81,6 +105,8 @@ export const useSettings = create<SettingsState>()(
       toggleEditMode: () => set((s) => ({ editMode: !s.editMode })),
       setCloseAction: (v) => set({ closeAction: v }),
       setLanguage: (l) => set({ language: l }),
+      setExportOptions: (patch) =>
+        set((s) => ({ exportOptions: { ...s.exportOptions, ...patch } })),
     }),
     { name: "openmd-settings" },
   ),
